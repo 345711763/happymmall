@@ -13,24 +13,43 @@ class Login extends React.Component {
       redirect: _mm.getUrlParam("redirect") || "/"
     };
   }
+  componentWillMount() {
+    document.title = "登录";
+  }
+  onKeyUpListener(e) {
+    if (e.keyCode === 13) {
+      this.onSubmit();
+    }
+  }
+  //当用户名发生改变
   onInputChange(e) {
     let inputName = e.target.name;
     this.setState({
       [inputName]: e.target.value
     });
   }
-  onSubmit(e) {
-    _user
-      .login({
-        username: this.state.username,
-        password: this.state.password
-      })
-      .then(res => {
-        this.props.history.push(this.state.redirect);
-      })
-      .catch(error => {
-        _mm.errorTips(error);
-      });
+  //当用户提交表单
+  onSubmit() {
+    let loginInfo = {
+      username: this.state.username,
+      password: this.state.password
+    };
+    let checkResult = _user.checkLoginInfo(loginInfo);
+    //验证通过
+    if (checkResult.status === true) {
+      _user
+        .login(loginInfo)
+        .then(res => {
+          this.props.history.push(this.state.redirect);
+        })
+        .catch(error => {
+          _mm.errorTips(error);
+        });
+    }
+    //验证不通过
+    else {
+      _mm.errorTips(checkResult.msg);
+    }
   }
   render() {
     return (
@@ -42,6 +61,7 @@ class Login extends React.Component {
               <div className="form-group">
                 <label htmlFor="exampleInputEmail1">Email address</label>
                 <input
+                  onKeyUp={event => this.onKeyUpListener(event)}
                   name="username"
                   className="form-control"
                   placeholder="User Name"
@@ -51,6 +71,7 @@ class Login extends React.Component {
               <div className="form-group">
                 <label htmlFor="exampleInputPassword1">Password</label>
                 <input
+                  onKeyUp={event => this.onKeyUpListener(event)}
                   name="password"
                   type="password"
                   className="form-control"
