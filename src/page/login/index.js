@@ -40,6 +40,7 @@ class Login extends React.Component {
       _user
         .login(loginInfo)
         .then(res => {
+          _mm.setStorage("userInfo", res);
           this.props.history.push(this.state.redirect);
         })
         .catch(error => {
