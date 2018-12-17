@@ -4,6 +4,7 @@ import { BrowserRouter, Switch, Redirect, Route, Link } from "react-router-dom";
 import Login from "./page/login";
 import Home from "./page/home";
 import Layout from "./component/layout";
+import ErrorPage from "./page/error";
 class App extends React.Component {
   render() {
     return (
@@ -20,6 +21,7 @@ class App extends React.Component {
                     <Route path="/product" exact component={Home} />
                     <Route path="/order" exact component={Home} />
                     <Route path="/user" exact component={Home} />
+                    <Route component={ErrorPage} />
                   </Switch>
                 </Layout>
               );
