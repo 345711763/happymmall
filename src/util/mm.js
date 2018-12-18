@@ -6,7 +6,7 @@ class Mutil {
         url: param.url || "",
         dataType: param.datatype || "json",
         data: param.data || null,
-        success(res) {
+        success: res => {
           //success
           if (0 === res.status) {
             resolve(res.data, res.msg);
@@ -17,7 +17,7 @@ class Mutil {
             reject(res.msg || res.data);
           }
         },
-        error(err) {
+        error: err => {
           reject(err.statusText);
         }
       });
@@ -38,6 +38,9 @@ class Mutil {
   //错误提示
   errorTips(errMsg) {
     alert(errMsg || "好像哪里不对了");
+  }
+  successTips(successMsg) {
+    alert(successMsg || "Success");
   }
   setStorage(name, data) {
     let dataType = typeof data;

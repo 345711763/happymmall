@@ -14,7 +14,7 @@ class Login extends React.Component {
     };
   }
   componentWillMount() {
-    document.title = "登录";
+    document.title = "Login";
   }
   onKeyUpListener(e) {
     if (e.keyCode === 13) {
@@ -56,7 +56,7 @@ class Login extends React.Component {
     return (
       <div className="col-md-4 col-md-offset-4">
         <div className="panel panel-default login-panel">
-          <div className="panel-heading">欢迎登陆 - MMALL管理系统</div>
+          <div className="panel-heading">Welcome - MMALL management system</div>
           <div className="panel-body">
             <div>
               <div className="form-group">

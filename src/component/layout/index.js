@@ -1,5 +1,6 @@
 import React from "react";
 import "./theme.css";
+import "./index.css";
 import TopNav from "../top-nav";
 import SideNav from "../side-nav";
 class Layout extends React.Component {
